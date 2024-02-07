@@ -1,0 +1,13 @@
+a {
+  color: white;
+  color: inherit;
+  text-decoration: inherit;
+}
+a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+mat-toolbar-row {
+  display: flex;
+  justify-content: space-around;
+}
