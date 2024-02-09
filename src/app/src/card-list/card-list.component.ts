@@ -1,24 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { WeekDayPipe } from '../week-day.pipe';
 export interface ILesson {
   time: string;
   subject: string;
   lecturer: string;
   classroom: string;
 }
-const lessonsList: ILesson[] = [
-  { time: '9:00', subject: 'PE', lecturer: 'Ab J', classroom: '41' },
-  { time: '10:00', subject: 'Math', lecturer: 'B Fo', classroom: '1' },
-  { time: '11:00', subject: 'French', lecturer: 'Lo O', classroom: '17' },
-];
+export type ILessonList = { dayId: number; lessons: ILesson[] };
 @Component({
   selector: 'app-card-list',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [MatTableModule, MatCardModule, WeekDayPipe],
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.scss',
 })
 export class CardListComponent {
   displayedColumns: string[] = ['time', 'subject', 'lecturer', 'classroom'];
-  dataSource = lessonsList;
+  @Input({ required: true }) dataSource!: ILessonList;
 }
