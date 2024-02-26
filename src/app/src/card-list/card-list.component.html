@@ -1,5 +1,10 @@
 <mat-card>
-  <mat-card-header>{{ dataSource.dayId | weekDay }}</mat-card-header>
+  <mat-card-header
+    ><mat-card-title>{{
+      dataSource.dayId | weekDay
+    }}</mat-card-title></mat-card-header
+  >
+  <mat-divider></mat-divider>
   <table mat-table [dataSource]="dataSource.lessons">
     <ng-container matColumnDef="time">
       <th mat-header-cell *matHeaderCellDef>Time</th>

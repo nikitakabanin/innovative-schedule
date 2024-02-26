@@ -1,5 +1,34 @@
-<div class="wrapper">
-  <ng-container *ngFor="let element of dataSource">
-    <app-card-list [dataSource]="element"></app-card-list>
-  </ng-container>
+<div class="container">
+  <div class="field-wrapper">
+    <button mat-icon-button (click)="toggleZoom()">
+      <mat-icon [ngStyle]="{ color: togglerZoom ? 'lightgreen' : 'grey' }">{{
+        togglerZoom ? "toggle_on" : "toggle_off"
+      }}</mat-icon>
+    </button>
+    <mat-form-field class="group-field">
+      <mat-label>Выберите группу</mat-label>
+      <input
+        #box
+        matInput
+        [matAutocomplete]="auto"
+        placeholder="Писать здесь"
+        (input)="onInputChange(box.value)"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (option of options; track option) {
+        <mat-option [value]="option" (click)="onInputChange(option)">{{
+          option
+        }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+    <button mat-icon-button (click)="onInputChange(box.value)">
+      <mat-icon> border_color</mat-icon>
+    </button>
+  </div>
+  <div class="wrapper">
+    <ng-container *ngFor="let element of currentSchedule">
+      <app-card-list [dataSource]="element"></app-card-list>
+    </ng-container>
+  </div>
 </div>

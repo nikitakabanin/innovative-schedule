@@ -1,8 +1,23 @@
-:host {
-  margin: 0 auto;
+.field-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  align-items: baseline;
+  gap: 15px;
+}
+.group-field {
+  display: flex;
+  width: 400px;
 }
 .wrapper {
   display: flex;
   justify-content: left;
   flex-wrap: wrap;
+  gap: 40px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 90px;
+  justify-content: space-between;
 }
