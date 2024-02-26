@@ -7,19 +7,19 @@
   <mat-divider></mat-divider>
   <table mat-table [dataSource]="dataSource.lessons">
     <ng-container matColumnDef="time">
-      <th mat-header-cell *matHeaderCellDef>Time</th>
+      <th mat-header-cell *matHeaderCellDef>Время</th>
       <td mat-cell *matCellDef="let element">{{ element.time }}</td>
     </ng-container>
     <ng-container matColumnDef="subject">
-      <th mat-header-cell *matHeaderCellDef>Subject</th>
+      <th mat-header-cell *matHeaderCellDef>Предмет</th>
       <td mat-cell *matCellDef="let element">{{ element.subject }}</td>
     </ng-container>
     <ng-container matColumnDef="lecturer">
-      <th mat-header-cell *matHeaderCellDef>Lecturer</th>
+      <th mat-header-cell *matHeaderCellDef>Преподаватель</th>
       <td mat-cell *matCellDef="let element">{{ element.lecturer }}</td>
     </ng-container>
     <ng-container matColumnDef="classroom">
-      <th mat-header-cell *matHeaderCellDef>Classroom</th>
+      <th mat-header-cell *matHeaderCellDef>Аудитория</th>
       <td mat-cell *matCellDef="let element">{{ element.classroom }}</td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

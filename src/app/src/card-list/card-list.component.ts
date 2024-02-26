@@ -3,14 +3,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { WeekDayPipe } from '../week-day.pipe';
 import { MatDividerModule } from '@angular/material/divider';
-export interface ILesson {
-  time: string;
-  subject: string;
-  lecturer: string;
-  classroom: string;
-}
-export type ILessonList = { dayId: number; lessons: ILesson[] };
-export type IGroup = { id: string; lessons: ILessonList[] };
+import { ILessonList } from '../models';
 @Component({
   selector: 'app-card-list',
   standalone: true,
