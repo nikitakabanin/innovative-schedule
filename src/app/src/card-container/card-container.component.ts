@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { WeekDayPipe } from '../week-day.pipe';
 import { HttpService } from '../../http.service';
 import { mockLessons } from '../mock.table';
+import { MatDialog } from '@angular/material/dialog';
+import { CardDialogComponent } from '../card-dialog/card-dialog.component';
 
 @Component({
   selector: 'app-card-container',
@@ -40,7 +42,7 @@ export class CardContainerComponent {
   options: string[];
   filteredOptions: string[];
   today = new Date();
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.data = mockLessons;
     this.options = this.data.map((e) => e.id); //['A1', 'B8', 'O7'];
     this.filteredOptions = [...this.options];
@@ -56,5 +58,12 @@ export class CardContainerComponent {
   }
   toggleZoom() {
     this.togglerZoom = !this.togglerZoom;
+  }
+  openDialog() {
+    // this.dialog
+    //   .open(CardDialogComponent, { autoFocus: true })
+    //   .afterClosed()
+    //   .subscribe((result) => console.log(result));
+    this.httpService.post();
   }
 }

@@ -11,9 +11,17 @@
 }
 .wrapper {
   display: flex;
-  justify-content: left;
+  justify-content: center;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 40px;
+}
+.single-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+  margin: auto;
 }
 .container {
   display: flex;

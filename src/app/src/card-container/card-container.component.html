@@ -13,7 +13,8 @@
         [matAutocomplete]="auto"
         placeholder="Писать здесь"
         (input)="onInputChange(box.value.toUpperCase())"
-        (keydown.enter)="onInputChange(box.value.toUpperCase())"
+        (keydown.enter)="onInputChange(box.value.toUpperCase()); box.blur()"
+        (click)="box.value = ''; onInputChange('')"
       />
       <mat-autocomplete #auto="matAutocomplete" requireSelection>
         @for (option of filteredOptions; track option) {
@@ -23,18 +24,16 @@
         }
       </mat-autocomplete>
     </mat-form-field>
-    <button mat-icon-button (click)="onInputChange(box.value.toUpperCase())">
+    <button mat-icon-button (click)="openDialog()">
       <mat-icon> border_color</mat-icon>
     </button>
   </div>
-  <div class="wrapper">
-    <ng-container *ngIf="!togglerZoom">
-      <ng-container *ngFor="let element of currentSchedule">
-        <app-card-list [dataSource]="element"></app-card-list>
-      </ng-container>
+  <div class="single-wrapper" *ngIf="!togglerZoom">
+    <ng-container *ngFor="let element of currentSchedule">
+      <app-card-list [dataSource]="element"></app-card-list>
     </ng-container>
-    <ng-container *ngIf="togglerZoom && todaySchedule">
-      <app-card-list [dataSource]="todaySchedule"></app-card-list>
-    </ng-container>
+  </div>
+  <div class="single-wrapper" *ngIf="togglerZoom && todaySchedule">
+    <app-card-list [dataSource]="todaySchedule"></app-card-list>
   </div>
 </div>

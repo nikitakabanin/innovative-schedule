@@ -6,3 +6,7 @@ export interface ILesson {
 }
 export type ILessonList = { dayId: number; lessons: ILesson[] };
 export type IGroup = { id: string; lessons: ILessonList[] };
+export interface AuthUser {
+  name: string;
+  password: string;
+}

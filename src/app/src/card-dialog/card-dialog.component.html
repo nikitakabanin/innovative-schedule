@@ -1,1 +1,42 @@
-<p>card-dialog works!</p>
+<h1 mat-dialog-title>Create user</h1>
+<div mat-dialog-content>
+  <!-- <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      [(ngModel)]="data.lessons[0]."
+      required
+      #name="ngModel"
+      maxlength="24"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input
+      matInput
+      [(ngModel)]="data.username"
+      required
+      #username="ngModel"
+      maxlength="30"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+      matInput
+      [(ngModel)]="data.email"
+      required
+      #email="ngModel"
+      maxlength="25"
+    />
+  </mat-form-field> -->
+  <mat-divider></mat-divider>
+</div>
+<mat-dialog-actions>
+  <button mat-button (click)="saveDialog()">Save</button>
+
+  <button mat-button (click)="cancelDialog()">Cancel</button>
+</mat-dialog-actions>

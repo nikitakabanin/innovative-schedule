@@ -1,9 +1,9 @@
 <main>
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span>Voenmekh</span>
-      <a routerLink="/schedule"><span>Schedule</span></a>
-      <a routerLink="/auth">Auth</a>
+      <span>Военмех</span>
+      <a routerLink="/schedule"><span>Расписание</span></a>
+      <a (click)="openAuthDialog()">Авторизация</a>
     </mat-toolbar-row></mat-toolbar
   >
   <router-outlet></router-outlet>

@@ -7,9 +7,13 @@ import { CardContainerComponent } from './src/card-container/card-container.comp
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, MatToolbarModule, CardContainerComponent, RouterLink],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'schedule';
+  isAuth = false;
+  constructor() {}
+  openAuthDialog() {}
 }
