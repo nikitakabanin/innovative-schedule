@@ -6,7 +6,8 @@ export interface ILesson {
 }
 export type ILessonList = { dayId: number; lessons: ILesson[] };
 export type IGroup = { id: string; lessons: ILessonList[] };
-export interface AuthUser {
+export interface IUser {
   name: string;
   password: string;
+  role: 'lecturer' | 'student' | 'admin';
 }

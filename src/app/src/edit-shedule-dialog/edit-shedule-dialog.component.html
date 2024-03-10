@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Редактировать</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Choose an option</mat-label>
+    <mat-select #select (selectionChange)="onSelectChange($event.value)">
+      @for (day of data; track $index) {
+      <mat-option [value]="day.dayId">{{ day.dayId | weekDay }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+<table mat-table [dataSource]="data" class="mat-elevation-z8">
+  <!-- Add columns to the table -->
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef>Время</th>
+    <td mat-cell *matCellDef="let element">
+      <input matInput [(ngModel)]="element.name" />
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="subject">
+    <th mat-header-cell *matHeaderCellDef>Предмет</th>
+    <td mat-cell *matCellDef="let element">
+      <input matInput type="number" [(ngModel)]="element.age" />
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="classroom">
+    <th mat-header-cell *matHeaderCellDef>Ауд.</th>
+    <td mat-cell *matCellDef="let element">
+      <input matInput [(ngModel)]="element.name" />
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lecturer">
+    <th mat-header-cell *matHeaderCellDef>Препод</th>
+    <td mat-cell *matCellDef="let element">
+      <input matInput type="number" [(ngModel)]="element.age" />
+    </td>
+  </ng-container>
+
+  <!-- Add more columns as needed -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

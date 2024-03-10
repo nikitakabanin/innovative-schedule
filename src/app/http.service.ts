@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnDestroy, inject } from '@angular/core';
-import { AuthUser, IGroup } from './src/models';
+import { IUser, IGroup } from './src/models';
 import { mockLessons } from './src/mock.table';
 import {
   BehaviorSubject,
@@ -14,7 +14,7 @@ import {
 
 const httpOptions = {
   headers: new HttpHeaders({
-    Header: 'Authorization',
+    Header: 'Bearer xyzabc123',
   }),
 };
 
@@ -51,16 +51,11 @@ export class HttpService implements OnDestroy {
       )
       .subscribe((value) => console.log(value));
   }
-  auth(user: AuthUser): Observable<boolean> {
-    return this.http
-      .post<boolean>(
-        'http://26.132.161.229:22222/postTesting',
-        user,
-        httpOptions
-      )
-      .pipe(
-        switchMap(() => of(true)),
-        catchError(() => of(false))
-      );
+  auth(user: IUser): Observable<boolean> {
+    return this.http.post<boolean>(
+      'http://26.132.161.229:22222/auth',
+      { login123: 'password123' },
+      httpOptions
+    );
   }
 }

@@ -13,6 +13,7 @@ import { HttpService } from '../../http.service';
 import { mockLessons } from '../mock.table';
 import { MatDialog } from '@angular/material/dialog';
 import { CardDialogComponent } from '../card-dialog/card-dialog.component';
+import { EditSheduleDialogComponent } from '../edit-shedule-dialog/edit-shedule-dialog.component';
 
 @Component({
   selector: 'app-card-container',
@@ -65,5 +66,14 @@ export class CardContainerComponent {
     //   .afterClosed()
     //   .subscribe((result) => console.log(result));
     this.httpService.post();
+  }
+  editSchedule() {
+    this.dialog
+      .open(EditSheduleDialogComponent, {
+        autoFocus: true,
+        data: this.currentSchedule,
+      })
+      .afterClosed()
+      .subscribe((v) => console.log(v));
   }
 }

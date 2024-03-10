@@ -1,9 +1,8 @@
 <h1 mat-dialog-title>Авторизация</h1>
-<div mat-dialog-content></div>
-<mat-dialog-actions>
+<div mat-dialog-content>
   <mat-form-field
     ><mat-label>Имя</mat-label>
-    <input matInput #name minlength="3" maxlength="20" />
+    <input matInput minlength="3" maxlength="20" />
   </mat-form-field>
   <mat-form-field
     ><mat-label>Пароль</mat-label>
@@ -15,6 +14,8 @@
       maxlength="20"
     />
   </mat-form-field>
+</div>
+<mat-dialog-actions>
   <button mat-button (click)="login()">Войти</button>
   <button mat-button (click)="cancel()">Отмена</button>
 </mat-dialog-actions>
