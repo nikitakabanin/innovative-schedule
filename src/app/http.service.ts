@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnDestroy, inject } from '@angular/core';
+import { Injectable, OnDestroy, SkipSelf, inject } from '@angular/core';
 import { IUser, IGroup } from './src/models';
 import { mockLessons } from './src/mock.table';
 import {
@@ -27,7 +27,7 @@ export class HttpService implements OnDestroy {
   private unsubscribe$ = new Subject<void>();
   constructor() {
     this.http
-      .get<IGroup[]>('http://26.132.161.229:22222/hello')
+      .get<IGroup[]>('https://jsonplaceholder.typicode.com/todos/1') //'http://26.132.161.229:22222/hello'
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((value) => console.log(value));
   }
@@ -52,9 +52,10 @@ export class HttpService implements OnDestroy {
       .subscribe((value) => console.log(value));
   }
   auth(user: IUser): Observable<boolean> {
+    user.name.toString();
     return this.http.post<boolean>(
       'http://26.132.161.229:22222/auth',
-      { login123: 'password123' },
+      { '[user.name': user.password },
       httpOptions
     );
   }
