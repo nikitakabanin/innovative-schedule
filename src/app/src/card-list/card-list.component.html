@@ -1,7 +1,9 @@
 <mat-card>
   <mat-card-header
     ><mat-card-title>{{ dataSource.dayId | weekDay }}</mat-card-title>
-    <button mat-icon-button><mat-icon>border_color</mat-icon></button>
+    <button mat-icon-button (click)="editCard.emit()">
+      <mat-icon>border_color</mat-icon>
+    </button>
   </mat-card-header>
   <mat-divider></mat-divider>
   <table mat-table [dataSource]="dataSource.lessons">

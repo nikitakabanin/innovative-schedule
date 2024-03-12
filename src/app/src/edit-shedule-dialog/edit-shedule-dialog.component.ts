@@ -38,7 +38,7 @@ import { MatTableModule } from '@angular/material/table';
 export class EditSheduleDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<EditSheduleDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ILessonList[]
+    @Inject(MAT_DIALOG_DATA) public data: ILessonList
   ) {}
   close() {
     this.dialogRef.close();
@@ -46,5 +46,4 @@ export class EditSheduleDialogComponent {
   onSelectChange(v: any) {
     console.log(v);
   }
-  displayedColumns = ['time', 'subject', 'classroom', 'lecturer'];
 }
