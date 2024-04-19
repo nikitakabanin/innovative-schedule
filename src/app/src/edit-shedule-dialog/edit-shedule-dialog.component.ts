@@ -5,20 +5,18 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatButton, MatButtonModule } from '@angular/material/button';
-import { MatButton, MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { IGroup, ILesson, ILessonList } from '../models';
+
 import { IGroup, ILesson, ILessonList } from '../models';
 import { WeekDayPipe } from '../week-day.pipe';
 import { CardListComponent } from '../card-list/card-list.component';
 import { NgIf, NgStyle } from '@angular/common';
-import { NgIf, NgStyle } from '@angular/common';
+
 import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -48,8 +46,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class EditSheduleDialogComponent {
   chosenLesson!: ILesson;
   index = 0;
-  chosenLesson!: ILesson;
-  index = 0;
+
   constructor(
     public dialogRef: MatDialogRef<EditSheduleDialogComponent>,
 

@@ -4,12 +4,6 @@ import {
   HttpRequest,
   HttpResponse,
 } from '@angular/common/http';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpRequest,
-  HttpResponse,
-} from '@angular/common/http';
 import { Injectable, OnDestroy, SkipSelf, inject } from '@angular/core';
 import { IUser, IGroup } from './src/models';
 import { mockLessons } from './src/mock.table';
@@ -26,7 +20,6 @@ import {
 const httpOptions = {
   headers: new HttpHeaders({
     Authenticaton: '123',
-    Authenticaton: '123',
   }),
 };
 
@@ -37,12 +30,12 @@ export class HttpService implements OnDestroy {
   private http = inject(HttpClient);
   private tables = new BehaviorSubject<IGroup[]>(mockLessons);
   private unsubscribe$ = new Subject<void>();
-  authToken = '';
+
   authToken = '';
   constructor() {
     this.http
       .get<IGroup[]>('http://26.132.161.229:22222/hello', {})
-      .get<IGroup[]>('http://26.132.161.229:22222/hello', {})
+
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((response) => console.log(response));
 
@@ -65,14 +58,12 @@ export class HttpService implements OnDestroy {
   }
 
   auth(user: IUser): Observable<any> {
-
-  auth(user: IUser): Observable<any> {
     user.name.toString();
-    return this.http.post<any>(
+
     return this.http.post<any>(
       'http://26.132.161.229:22222/auth',
       { login: user.name, password: user.password },
-      { login: user.name, password: user.password },
+
       httpOptions
     );
   }
