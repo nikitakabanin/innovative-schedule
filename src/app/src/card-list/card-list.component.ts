@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { WeekDayPipe } from '../week-day.pipe';

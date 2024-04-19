@@ -59,6 +59,7 @@ export class CardContainerComponent {
   toggleZoom() {
     this.togglerZoom = !this.togglerZoom;
   }
+<<<<<<< HEAD
 
   editSchedule(lessons: ILessonList) {
     console.log(lessons);
