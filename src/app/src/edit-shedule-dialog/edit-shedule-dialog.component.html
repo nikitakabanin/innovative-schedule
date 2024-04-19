@@ -1,35 +1,21 @@
 <h1 mat-dialog-title>Редактировать</h1>
-
 <div mat-dialog-content>
   <p>{{ data.dayId | weekDay }}</p>
 
   <mat-form-field>
     <mat-label>Время</mat-label>
-    <input
-      #time="ngModel"
-      [(ngModel)]="chosenLesson.time"
-      matInput
-      pattern="(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]"
-      placeholder="чч:мм"
-      required
-    />
+    <input #time="ngModel" [(ngModel)]="data.lessons[0].time" matInput />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Предмет</mat-label>
-    <input
-      matInput
-      #subject="ngModel"
-      [(ngModel)]="chosenLesson.subject"
-      required
-    />
+    <input matInput #subject="ngModel" [(ngModel)]="data.lessons[0].subject" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Аудитория</mat-label>
     <input
       matInput
       #classroom="ngModel"
-      [(ngModel)]="chosenLesson.classroom"
-      required
+      [(ngModel)]="data.lessons[0].classroom"
     />
   </mat-form-field>
   <mat-form-field>
@@ -37,8 +23,7 @@
     <input
       matInput
       #lecturer="ngModel"
-      [(ngModel)]="chosenLesson.lecturer"
-      required
+      [(ngModel)]="data.lessons[0].lecturer"
     />
   </mat-form-field>
   <div class="slider-wrapper">
@@ -74,15 +59,3 @@
     </button>
   </div>
 </div>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Отмена</button>
-  <button
-    mat-button
-    (click)="close()"
-    [disabled]="
-      time.invalid || subject.invalid || lecturer.invalid || classroom.invalid
-    "
-  >
-    Сохранить
-  </button>
-</mat-dialog-actions>

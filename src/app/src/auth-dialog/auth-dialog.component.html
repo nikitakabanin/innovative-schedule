@@ -2,35 +2,24 @@
 <div mat-dialog-content>
   <mat-form-field
     ><mat-label>Имя</mat-label>
-    <input
-      [(ngModel)]="data.name"
-      #name="ngModel"
-      matInput
-      minlength="3"
-      maxlength="20"
-      required
-    />
+    <input matInput minlength="3" maxlength="20" />
   </mat-form-field>
   <mat-form-field
     ><mat-label>Пароль</mat-label>
     <input
-      [(ngModel)]="data.password"
-      #password="ngModel"
       matInput
+<<<<<<< HEAD
       type="text"
+=======
+      type="password"
+      [(ngModel)]="data.password"
+>>>>>>> parent of 5d88391 (add arrows on edit dialog)
       minlength="3"
       maxlength="20"
-      required
     />
   </mat-form-field>
 </div>
 <mat-dialog-actions>
-  <button
-    mat-button
-    [disabled]="password.control.invalid || name.control.invalid"
-    [mat-dialog-close]="data"
-  >
-    Войти
-  </button>
-  <button mat-button mat-dialog-close>Отмена</button>
+  <button mat-button (click)="login()">Войти</button>
+  <button mat-button (click)="cancel()">Отмена</button>
 </mat-dialog-actions>

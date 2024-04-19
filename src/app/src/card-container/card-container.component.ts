@@ -13,7 +13,11 @@ import { HttpService } from '../../http.service';
 import { mockLessons } from '../mock.table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditSheduleDialogComponent } from '../edit-shedule-dialog/edit-shedule-dialog.component';
+<<<<<<< HEAD
 import cloner from 'lodash';
+=======
+
+>>>>>>> parent of 5d88391 (add arrows on edit dialog)
 @Component({
   selector: 'app-card-container',
   standalone: true,
@@ -59,6 +63,7 @@ export class CardContainerComponent {
   toggleZoom() {
     this.togglerZoom = !this.togglerZoom;
   }
+<<<<<<< HEAD
 
   editSchedule(lessons: ILessonList) {
     this.dialog
@@ -74,5 +79,22 @@ export class CardContainerComponent {
             res
           );
       });
+=======
+  openDialog() {
+    // this.dialog
+    //   .open(CardDialogComponent, { autoFocus: true })
+    //   .afterClosed()
+    //   .subscribe((result) => console.log(result));
+    this.httpService.post();
+  }
+  editSchedule() {
+    this.dialog
+      .open(EditSheduleDialogComponent, {
+        autoFocus: true,
+        data: this.currentSchedule,
+      })
+      .afterClosed()
+      .subscribe((v) => console.log(v));
+>>>>>>> parent of 5d88391 (add arrows on edit dialog)
   }
 }

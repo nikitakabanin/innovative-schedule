@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { WeekDayPipe } from '../week-day.pipe';
@@ -23,8 +23,11 @@ import { MatButtonModule } from '@angular/material/button';
 export class CardListComponent {
   displayedColumns: string[] = ['time', 'subject', 'lecturer', 'classroom'];
   @Input({ required: true }) dataSource!: ILessonList;
+<<<<<<< HEAD
   @Output() editCard = new EventEmitter<ILessonList>();
   emitEdit() {
     this.editCard.emit(this.dataSource);
   }
+=======
+>>>>>>> parent of 5d88391 (add arrows on edit dialog)
 }

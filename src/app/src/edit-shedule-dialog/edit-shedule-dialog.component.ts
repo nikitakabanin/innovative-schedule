@@ -43,10 +43,15 @@ export class EditSheduleDialogComponent {
   index = 0;
   constructor(
     public dialogRef: MatDialogRef<EditSheduleDialogComponent>,
+<<<<<<< HEAD
     @Inject(MAT_DIALOG_DATA) public data: ILessonList
   ) {
     this.chosenLesson = data.lessons[0];
   }
+=======
+    @Inject(MAT_DIALOG_DATA) public data: ILessonList[]
+  ) {}
+>>>>>>> parent of 5d88391 (add arrows on edit dialog)
   close() {
     // this.data.lessons.sort((a, b) => a.time - b.time);
     this.dialogRef.close();
@@ -54,6 +59,7 @@ export class EditSheduleDialogComponent {
   onSelectChange(v: any) {
     console.log(v);
   }
+<<<<<<< HEAD
   nextLesson() {
     this.index !== this.data.lessons.length - 1
       ? (this.chosenLesson = this.data.lessons[++this.index])
@@ -82,4 +88,7 @@ export class EditSheduleDialogComponent {
     this.nextLesson();
     console.log(this.data.lessons);
   }
+=======
+  displayedColumns = ['time', 'subject', 'classroom', 'lecturer'];
+>>>>>>> parent of 5d88391 (add arrows on edit dialog)
 }
