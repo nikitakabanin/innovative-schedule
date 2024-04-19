@@ -30,10 +30,16 @@
   </div>
   <div class="single-wrapper" *ngIf="!togglerZoom">
     <ng-container *ngFor="let element of currentSchedule">
-      <app-card-list [dataSource]="element"></app-card-list>
+      <app-card-list
+        [dataSource]="element"
+        (editCard)="editSchedule(element)"
+      ></app-card-list>
     </ng-container>
   </div>
   <div class="single-wrapper" *ngIf="togglerZoom && todaySchedule">
-    <app-card-list [dataSource]="todaySchedule"></app-card-list>
+    <app-card-list
+      [dataSource]="todaySchedule"
+      (editCard)="editSchedule(todaySchedule)"
+    ></app-card-list>
   </div>
 </div>

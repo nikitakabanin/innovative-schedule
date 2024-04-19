@@ -59,7 +59,6 @@ export class CardContainerComponent {
   toggleZoom() {
     this.togglerZoom = !this.togglerZoom;
   }
-<<<<<<< HEAD
 
   editSchedule(lessons: ILessonList) {
     console.log(lessons);
@@ -78,10 +77,6 @@ export class CardContainerComponent {
       });
   }
   openDialog() {
-    // this.dialog
-    //   .open(CardDialogComponent, { autoFocus: true })
-    //   .afterClosed()
-    //   .subscribe((result) => console.log(result));
     this.httpService.post();
   }
 }
