@@ -12,10 +12,8 @@ import { WeekDayPipe } from '../week-day.pipe';
 import { HttpService } from '../../http.service';
 import { mockLessons } from '../mock.table';
 import { MatDialog } from '@angular/material/dialog';
-import { CardDialogComponent } from '../card-dialog/card-dialog.component';
 import { EditSheduleDialogComponent } from '../edit-shedule-dialog/edit-shedule-dialog.component';
-import { catchError, switchMap, take, tap } from 'rxjs';
-
+import cloner from 'lodash';
 @Component({
   selector: 'app-card-container',
   standalone: true,
@@ -62,8 +60,27 @@ export class CardContainerComponent {
     this.togglerZoom = !this.togglerZoom;
   }
 
-  editSchedule(data: ILessonList) {
-    console.log(1);
-    this.dialog.open(EditSheduleDialogComponent, { data: data });
+  editSchedule(lessons: ILessonList) {
+    console.log(lessons);
+    this.dialog
+      .open(EditSheduleDialogComponent, {
+        data: cloner.cloneDeep(lessons),
+      })
+      .afterClosed()
+      .subscribe((res: ILessonList) => {
+        if (res)
+          this.currentSchedule?.splice(
+            this.currentSchedule.findIndex((e) => e.dayId === res.dayId),
+            1,
+            res
+          );
+      });
+  }
+  openDialog() {
+    // this.dialog
+    //   .open(CardDialogComponent, { autoFocus: true })
+    //   .afterClosed()
+    //   .subscribe((result) => console.log(result));
+    this.httpService.post();
   }
 }

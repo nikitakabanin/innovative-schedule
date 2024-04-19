@@ -11,3 +11,9 @@ export interface IUser {
   password: string;
   role: 'lecturer' | 'student' | 'admin';
 }
+
+export interface IServerSchedule {
+  Number: string;
+  IdGroup: string;
+  Days: {};
+}

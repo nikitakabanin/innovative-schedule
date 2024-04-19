@@ -1,4 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
 import { Injectable, OnDestroy, SkipSelf, inject } from '@angular/core';
 import { IUser, IGroup } from './src/models';
 import { mockLessons } from './src/mock.table';
@@ -14,7 +19,7 @@ import {
 
 const httpOptions = {
   headers: new HttpHeaders({
-    Header: 'Bearer xyzabc123',
+    Authenticaton: '123',
   }),
 };
 
@@ -25,11 +30,22 @@ export class HttpService implements OnDestroy {
   private http = inject(HttpClient);
   private tables = new BehaviorSubject<IGroup[]>(mockLessons);
   private unsubscribe$ = new Subject<void>();
+  authToken = '';
   constructor() {
     this.http
-      .get<IGroup[]>('https://jsonplaceholder.typicode.com/todos/1') //'http://26.132.161.229:22222/hello'
+      .get<IGroup[]>('http://26.132.161.229:22222/hello', {})
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((value) => console.log(value));
+      .subscribe((response) => console.log(response));
+
+    this.http
+      .post<any>(
+        'http://26.132.161.229:22222/auth',
+        { login: 'user', password: '23423423' },
+        httpOptions
+      )
+      .subscribe((v) => console.log(v));
+
+    //this.http.get<string>('getauthtokenurl');
   }
   ngOnDestroy(): void {
     this.unsubscribe$.next();
@@ -38,25 +54,14 @@ export class HttpService implements OnDestroy {
   getTables(): BehaviorSubject<IGroup[]> {
     return this.tables;
   }
-  post() {
-    this.http
-      .post(
-        'http://26.132.161.229:22222/postTesting',
-        {
-          name: 'admin',
-          password: 'admin_password',
-        },
 
-        httpOptions
-      )
-      .subscribe((value) => console.log(value));
-  }
-  auth(user: IUser): Observable<boolean> {
+  auth(user: IUser): Observable<any> {
     user.name.toString();
-    return this.http.post<boolean>(
+    return this.http.post<any>(
       'http://26.132.161.229:22222/auth',
-      { '[user.name': user.password },
+      { login: user.name, password: user.password },
       httpOptions
     );
   }
+  post() {}
 }
