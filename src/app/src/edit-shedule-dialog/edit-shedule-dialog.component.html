@@ -1,20 +1,35 @@
 <h1 mat-dialog-title>Редактировать</h1>
 
 <div mat-dialog-content>
+  <p>{{ data.dayId | weekDay }}</p>
+
   <mat-form-field>
     <mat-label>Время</mat-label>
-    <input #time="ngModel" [(ngModel)]="data.lessons[0].time" matInput />
+    <input
+      #time="ngModel"
+      [(ngModel)]="chosenLesson.time"
+      matInput
+      pattern="(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]"
+      placeholder="чч:мм"
+      required
+    />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Предмет</mat-label>
-    <input matInput #subject="ngModel" [(ngModel)]="data.lessons[0].subject" />
+    <input
+      matInput
+      #subject="ngModel"
+      [(ngModel)]="chosenLesson.subject"
+      required
+    />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Аудитория</mat-label>
     <input
       matInput
       #classroom="ngModel"
-      [(ngModel)]="data.lessons[0].classroom"
+      [(ngModel)]="chosenLesson.classroom"
+      required
     />
   </mat-form-field>
   <mat-form-field>
@@ -22,7 +37,52 @@
     <input
       matInput
       #lecturer="ngModel"
-      [(ngModel)]="data.lessons[0].lecturer"
+      [(ngModel)]="chosenLesson.lecturer"
+      required
     />
   </mat-form-field>
+  <div class="slider-wrapper">
+    <button
+      mat-icon-button
+      (click)="prevLesson()"
+      [disabled]="
+        time.invalid || subject.invalid || lecturer.invalid || classroom.invalid
+      "
+    >
+      <mat-icon [ngStyle]="{ color: 'black' }">arrow_back</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      (click)="nextLesson()"
+      [disabled]="
+        time.invalid || subject.invalid || lecturer.invalid || classroom.invalid
+      "
+    >
+      <mat-icon [ngStyle]="{ color: 'black' }">arrow_forward</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      (click)="addLesson()"
+      [disabled]="
+        time.invalid || subject.invalid || lecturer.invalid || classroom.invalid
+      "
+    >
+      <mat-icon [ngStyle]="{ color: 'black' }">add</mat-icon>
+    </button>
+    <button mat-icon-button (click)="deleteLesson()">
+      <mat-icon [ngStyle]="{ color: 'black' }">delete</mat-icon>
+    </button>
+  </div>
 </div>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Отмена</button>
+  <button
+    mat-button
+    (click)="close()"
+    [disabled]="
+      time.invalid || subject.invalid || lecturer.invalid || classroom.invalid
+    "
+  >
+    Сохранить
+  </button>
+</mat-dialog-actions>

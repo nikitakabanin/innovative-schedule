@@ -24,4 +24,7 @@ export class CardListComponent {
   displayedColumns: string[] = ['time', 'subject', 'lecturer', 'classroom'];
   @Input({ required: true }) dataSource!: ILessonList;
   @Output() editCard = new EventEmitter<ILessonList>();
+  emitEdit() {
+    this.editCard.emit(this.dataSource);
+  }
 }

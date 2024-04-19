@@ -2,3 +2,11 @@ div[mat-dialog-content] {
   display: flex;
   flex-direction: column;
 }
+.slider-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+mat-dialog-actions {
+  display: flex;
+  justify-content: right;
+}

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -8,13 +8,14 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { tap, Observable, catchError, throwError } from 'rxjs';
+import { JwtService } from '../jwt.service';
 
 export const AuthInterceptor = (
   req: HttpRequest<any>,
   next: HttpHandlerFn
 ): Observable<HttpEvent<any>> => {
-  const authToken = 'your_auth_token';
-
+  const jwt = inject(JwtService);
+  const authToken = jwt.getToken();
   const authReq = req.clone({
     headers: req.headers.set('Authorization', authToken),
   });
