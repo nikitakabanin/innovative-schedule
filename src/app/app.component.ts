@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthDialogComponent } from './src/auth-dialog/auth-dialog.component';
 import { IUser } from './src/models';
 import { HttpService } from './http.service';
+import { EditSheduleDialogComponent } from './src/edit-shedule-dialog/edit-shedule-dialog.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,11 +22,13 @@ export class AppComponent {
   http = inject(HttpService);
   constructor(public dialog: MatDialog) {}
   openAuthDialog() {
+    //cant open auth dialog
     this.dialog
       .open(AuthDialogComponent, { autoFocus: true })
       .afterClosed()
       .subscribe((value) => {
         this.http.auth(value).subscribe((v) => console.log(v));
       });
+    //this.dialog.open(EditSheduleDialogComponent, { data: { lessons: {} } });
   }
 }

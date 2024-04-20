@@ -3,13 +3,11 @@
   <mat-form-field
     ><mat-label>Имя</mat-label>
     <input matInput minlength="3" maxlength="20" />
-    <input matInput minlength="3" maxlength="20" />
   </mat-form-field>
   <mat-form-field
     ><mat-label>Пароль</mat-label>
     <input
       matInput
-      ]
       type="text"
       type="password"
       [(ngModel)]="data.password"
@@ -19,8 +17,6 @@
   </mat-form-field>
 </div>
 <mat-dialog-actions>
-  <button mat-button (click)="login()">Войти</button>
-  <button mat-button (click)="cancel()">Отмена</button>
   <button mat-button (click)="login()">Войти</button>
   <button mat-button (click)="cancel()">Отмена</button>
 </mat-dialog-actions>
