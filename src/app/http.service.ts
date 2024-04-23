@@ -17,12 +17,6 @@ import {
   catchError,
 } from 'rxjs';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    Authenticaton: '123',
-  }),
-};
-
 @Injectable({
   providedIn: 'root',
 })
@@ -33,17 +27,28 @@ export class HttpService implements OnDestroy {
 
   authToken = '';
   constructor() {
-    this.http
-      .get<IGroup[]>('http://26.132.161.229:22222/hello', {})
-
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => console.log(response));
-
+    // this.http
+    //   .post<any>(
+    //     'http://26.130.211.203:8080/group_number',
+    //     'group=group_09C31&'
+    //   )
+    //   .pipe(takeUntil(this.unsubscribe$))
+    //   .subscribe((response) => console.log(response));
+    // this.http
+    //   .post<any>(
+    //     'http://26.130.211.203:8080/login',
+    //     'username=aboba&password=32131&'
+    //   )
+    //   .pipe(takeUntil(this.unsubscribe$))
+    //   .subscribe((response) => console.log(response));
+    // this.http
+    //   .get<any>('http://26.130.211.203:8080/all_groups')
+    //   .pipe(takeUntil(this.unsubscribe$))
+    //   .subscribe((v) => console.log(v));
     this.http
       .post<any>(
-        'http://26.132.161.229:22222/auth',
-        { login: 'user', password: '23423423' },
-        httpOptions
+        'http://26.130.211.203:8080/login/group_number',
+        'group=group_09C31&'
       )
       .subscribe((v) => console.log(v));
 
@@ -61,10 +66,8 @@ export class HttpService implements OnDestroy {
     user.name.toString();
 
     return this.http.post<any>(
-      'http://26.132.161.229:22222/auth',
-      { login: user.name, password: user.password },
-
-      httpOptions
+      'http://26.130.211.203:8080/login',
+      `username=${user.name}&password=${user.password}&`
     );
   }
   post() {}

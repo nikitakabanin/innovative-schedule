@@ -23,16 +23,6 @@ import { Observable } from 'rxjs';
 })
 export class AuthDialogComponent {
   data: IUser = { name: '', password: '', role: 'student' };
-  http = inject(HttpService);
-  auth$?: Observable<boolean>;
+
   constructor(public dialogRef: MatDialogRef<AuthDialogComponent>) {}
-  login() {
-    this.dialogRef.close(this.auth$);
-    this.auth$ = this.http.auth(this.data);
-    this.auth$.subscribe((e) => console.log(e));
-  }
-  registration() {}
-  cancel() {
-    this.dialogRef.close();
-  }
 }
