@@ -58,8 +58,8 @@ export class HttpService implements OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-  getTables(): BehaviorSubject<IGroup[]> {
-    return this.tables;
+  getGroupNames(): Observable<string[]> {
+    return this.http.get<string[]>('http://26.130.211.203:8080/all_groups');
   }
 
   auth(user: IUser): Observable<any> {

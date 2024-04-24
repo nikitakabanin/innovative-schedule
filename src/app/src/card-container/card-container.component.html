@@ -29,7 +29,7 @@
     </button> -->
   </div>
   <div class="single-wrapper" *ngIf="!togglerZoom">
-    <ng-container *ngFor="let element of currentSchedule">
+    <ng-container *ngFor="let element of currentSchedule.value">
       <app-card-list
         [dataSource]="element"
         (editCard)="editSchedule(element)"

@@ -1,5 +1,5 @@
 import { NgFor, NgIf, NgStyle } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { IGroup, ILessonList } from '../models';
 import { CardListComponent } from '../card-list/card-list.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -14,6 +14,7 @@ import { mockLessons } from '../mock.table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditSheduleDialogComponent } from '../edit-shedule-dialog/edit-shedule-dialog.component';
 import cloner from 'lodash';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-card-container',
   standalone: true,
@@ -33,25 +34,32 @@ import cloner from 'lodash';
   templateUrl: './card-container.component.html',
   styleUrl: './card-container.component.scss',
 })
-export class CardContainerComponent {
+export class CardContainerComponent implements OnDestroy {
   httpService = inject(HttpService);
   togglerZoom = false;
+  today = new Date();
   data: IGroup[];
-  currentSchedule?: ILessonList[];
+  currentSchedule = new BehaviorSubject<ILessonList[] | undefined>(undefined);
   todaySchedule?: ILessonList;
   options: string[];
   filteredOptions: string[];
-  today = new Date();
+  unsubscribe$ = new Subject<void>();
   constructor(public dialog: MatDialog) {
     this.data = mockLessons;
     this.options = this.data.map((e) => e.id); //['A1', 'B8', 'O7'];
     this.filteredOptions = [...this.options];
+    this.httpService
+      .getGroupNames()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((value) => (this.options = value));
   }
   onInputChange(value: string) {
     this.filteredOptions = this.options.filter((opt) => opt.includes(value));
     if (this.options.includes(value)) {
-      this.currentSchedule = this.data.find((el) => el.id === value)?.lessons;
-      this.todaySchedule = this.currentSchedule?.find(
+      this.currentSchedule.next(
+        this.data.find((el) => el.id === value)?.lessons
+      ); // = this.data.find((el) => el.id === value)?.lessons;
+      this.todaySchedule = this.currentSchedule.value?.find(
         (el) => el.dayId === this.today.getDay()
       );
     }
@@ -69,8 +77,8 @@ export class CardContainerComponent {
       .afterClosed()
       .subscribe((res: ILessonList) => {
         if (res)
-          this.currentSchedule?.splice(
-            this.currentSchedule.findIndex((e) => e.dayId === res.dayId),
+          this.currentSchedule.value?.splice(
+            this.currentSchedule.value.findIndex((e) => e.dayId === res.dayId),
             1,
             res
           );
@@ -78,5 +86,9 @@ export class CardContainerComponent {
   }
   openDialog() {
     this.httpService.post();
+  }
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
