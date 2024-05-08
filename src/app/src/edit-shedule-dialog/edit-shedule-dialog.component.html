@@ -1,9 +1,6 @@
 <h1 mat-dialog-title>Редактировать</h1>
 <div mat-dialog-content>
   <p>{{ data.dayId | weekDay }}</p>
-
-  <p>{{ data.dayId | weekDay }}</p>
-
   <mat-form-field>
     <mat-label>Время</mat-label>
     <input
@@ -15,14 +12,18 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Предмет</mat-label>
-    <input matInput #subject="ngModel" [(ngModel)]="data.lessons[0].subject" />
+    <input
+      matInput
+      #subject="ngModel"
+      [(ngModel)]="data.lessons[index].subject"
+    />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Аудитория</mat-label>
     <input
       matInput
       #classroom="ngModel"
-      [(ngModel)]="data.lessons[0].classroom"
+      [(ngModel)]="data.lessons[index].classroom"
     />
   </mat-form-field>
   <mat-form-field>
@@ -30,7 +31,7 @@
     <input
       matInput
       #lecturer="ngModel"
-      [(ngModel)]="data.lessons[0].lecturer"
+      [(ngModel)]="data.lessons[index].lecturer"
     />
   </mat-form-field>
   <div class="slider-wrapper">

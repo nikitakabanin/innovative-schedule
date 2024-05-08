@@ -4,14 +4,14 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-import { IGroup, ILesson, ILessonList } from '../models';
+import { ILesson, ILessonList } from '../models';
 import { WeekDayPipe } from '../week-day.pipe';
 import { CardListComponent } from '../card-list/card-list.component';
 import { NgIf, NgStyle } from '@angular/common';
@@ -24,9 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [
     NgStyle,
-    NgStyle,
     MatDialogModule,
-    MatButtonModule,
     MatButtonModule,
     FormsModule,
     MatFormFieldModule,
@@ -37,7 +35,6 @@ import { MatIconModule } from '@angular/material/icon';
     CardListComponent,
     NgIf,
     MatTableModule,
-    MatIconModule,
     MatIconModule,
   ],
   templateUrl: './edit-shedule-dialog.component.html',
@@ -56,8 +53,6 @@ export class EditSheduleDialogComponent {
   }
 
   close() {
-    // this.data.lessons.sort((a, b) => a.time - b.time);
-    // this.data.lessons.sort((a, b) => a.time - b.time);
     this.dialogRef.close();
   }
   onSelectChange(v: any) {
@@ -68,6 +63,7 @@ export class EditSheduleDialogComponent {
     this.index !== this.data.lessons.length - 1
       ? (this.chosenLesson = this.data.lessons[++this.index])
       : (this.chosenLesson = this.data.lessons[(this.index = 0)]);
+    console.log(this.chosenLesson);
   }
   prevLesson() {
     this.index !== 0

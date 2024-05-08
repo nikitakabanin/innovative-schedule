@@ -47,7 +47,7 @@ export class HttpService implements OnDestroy {
     //   .subscribe((v) => console.log(v));
     this.http
       .post<any>(
-        'http://26.130.211.203:8080/login/group_number',
+        'http://26.130.211.203:8080/group_number',
         'group=group_09C31&'
       )
       .subscribe((v) => console.log(v));

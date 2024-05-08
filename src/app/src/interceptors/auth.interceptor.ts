@@ -23,6 +23,7 @@ export const AuthInterceptor = (
   return next(authReq).pipe(
     catchError((err: HttpErrorResponse) => {
       if (err.status === 401) {
+        jwt.removeToken();
       }
       return throwError(() => err);
     })
