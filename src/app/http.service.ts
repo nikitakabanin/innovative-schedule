@@ -16,6 +16,7 @@ import {
   of,
   catchError,
 } from 'rxjs';
+import { translateBackGroup } from './src/translate.util';
 
 @Injectable({
   providedIn: 'root',
@@ -45,13 +46,12 @@ export class HttpService implements OnDestroy {
     //   .get<any>('http://26.130.211.203:8080/all_groups')
     //   .pipe(takeUntil(this.unsubscribe$))
     //   .subscribe((v) => console.log(v));
-    this.http
-      .post<any>(
-        'http://26.130.211.203:8080/group_number',
-        'group=group_09C31&'
-      )
-      .subscribe((v) => console.log(v));
-
+    // this.http
+    //   .post<any>(
+    //     'http://26.130.211.203:8080/group_number',
+    //     'group=group_09C31&'
+    //   )
+    //   .subscribe((v) => console.log(v));
     //this.http.get<string>('getauthtokenurl');
   }
   ngOnDestroy(): void {
@@ -63,7 +63,12 @@ export class HttpService implements OnDestroy {
       'http://26.130.211.203:8080/all_groups'
     );
   }
-
+  getGroup(group: string) {
+    return this.http.post<any>(
+      'http://26.130.211.203:8080/group_number',
+      `group=${translateBackGroup(group)}`
+    );
+  }
   auth(user: IUser): Observable<any> {
     user.name.toString();
 
@@ -73,6 +78,6 @@ export class HttpService implements OnDestroy {
     );
   }
   edit(group: IGroup) {
-    this.http.post<any>('http://26.130.211.203:8080/edit', { group });
+    return this.http.post<any>('http://26.130.211.203:8080/edit', { group });
   }
 }

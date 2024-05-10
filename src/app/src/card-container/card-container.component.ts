@@ -66,6 +66,10 @@ export class CardContainerComponent implements OnDestroy {
       this.currentSchedule.next(
         this.data.find((el) => el.id === value)?.lessons
       );
+      this.httpService.getGroup(value).subscribe((response) => {
+        this.currentSchedule.next(response);
+        console.log(response);
+      });
       this.todaySchedule = this.currentSchedule.value?.find(
         (el) => el.dayId === this.today.getDay()
       );
@@ -73,6 +77,7 @@ export class CardContainerComponent implements OnDestroy {
   }
   toggleZoom() {
     this.togglerZoom = !this.togglerZoom;
+    this.httpService.edit(this.data[0]).subscribe((v) => console.log(v));
   }
 
   editSchedule(lessons: ILessonList) {
