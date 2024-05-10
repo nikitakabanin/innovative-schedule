@@ -14,7 +14,9 @@ import { mockLessons } from '../mock.table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditSheduleDialogComponent } from '../edit-shedule-dialog/edit-shedule-dialog.component';
 import cloner from 'lodash';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil, map } from 'rxjs';
+import { GroupNamePipe } from '../group-name.pipe';
+import { translateGroup } from '../translate.util';
 @Component({
   selector: 'app-card-container',
   standalone: true,
@@ -29,6 +31,7 @@ import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
     MatButtonModule,
     FormsModule,
     WeekDayPipe,
+    GroupNamePipe,
     NgStyle,
   ],
   templateUrl: './card-container.component.html',
@@ -46,19 +49,23 @@ export class CardContainerComponent implements OnDestroy {
   unsubscribe$ = new Subject<void>();
   constructor(public dialog: MatDialog) {
     this.data = mockLessons;
-    this.options = this.data.map((e) => e.id); //['A1', 'B8', 'O7'];
-    this.filteredOptions = [...this.options];
     this.httpService
       .getGroupNames()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((value) => (this.options = value));
+      .subscribe((value) => {
+        this.options = value.groups.map((v) => translateGroup(v));
+        this.filteredOptions = [...this.options];
+        console.log(this.filteredOptions);
+      });
+    this.options = this.data.map((e) => e.id);
+    this.filteredOptions = [...this.options];
   }
   onInputChange(value: string) {
     this.filteredOptions = this.options.filter((opt) => opt.includes(value));
     if (this.options.includes(value)) {
       this.currentSchedule.next(
         this.data.find((el) => el.id === value)?.lessons
-      ); // = this.data.find((el) => el.id === value)?.lessons;
+      );
       this.todaySchedule = this.currentSchedule.value?.find(
         (el) => el.dayId === this.today.getDay()
       );
@@ -84,9 +91,7 @@ export class CardContainerComponent implements OnDestroy {
           );
       });
   }
-  openDialog() {
-    this.httpService.post();
-  }
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

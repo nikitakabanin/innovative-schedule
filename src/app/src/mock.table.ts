@@ -1,7 +1,7 @@
 import { IGroup } from './models';
 export const mockLessons: IGroup[] = [
   {
-    id: 'О728Б',
+    id: 'group_O728B',
     lessons: [
       {
         dayId: 1,

@@ -58,8 +58,10 @@ export class HttpService implements OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-  getGroupNames(): Observable<string[]> {
-    return this.http.get<string[]>('http://26.130.211.203:8080/all_groups');
+  getGroupNames(): Observable<{ groups: string[] }> {
+    return this.http.get<{ groups: string[] }>(
+      'http://26.130.211.203:8080/all_groups'
+    );
   }
 
   auth(user: IUser): Observable<any> {
@@ -70,5 +72,7 @@ export class HttpService implements OnDestroy {
       `username=${user.name}&password=${user.password}&`
     );
   }
-  post() {}
+  edit(group: IGroup) {
+    this.http.post<any>('http://26.130.211.203:8080/edit', { group });
+  }
 }
