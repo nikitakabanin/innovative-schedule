@@ -3,7 +3,9 @@
     <mat-toolbar-row>
       <span>Военмех</span>
       <a routerLink="/schedule"><span>Расписание</span></a>
-      <a (click)="openAuthDialog()">Авторизация</a>
+      @if (isAuth) {
+      <span>Вы авторизованы</span>
+      }@else{<a (click)="openAuthDialog()">Авторизация</a>}
     </mat-toolbar-row></mat-toolbar
   >
   <router-outlet></router-outlet>

@@ -74,20 +74,22 @@ export class EditSheduleDialogComponent {
   addLesson() {
     this.data.lessons.push({
       time: '',
-      subject: '',
+      discipline: '',
       lecturer: '',
       classroom: '',
+      week_code: 1,
+      day: '',
     });
     this.index = this.data.lessons.length - 1;
     this.chosenLesson = this.data.lessons[this.index];
   }
   deleteLesson() {
     this.data.lessons = this.data.lessons.filter(
-      (e) => e.subject !== this.chosenLesson.subject
+      (e) => e.discipline !== this.chosenLesson.discipline
     );
     this.nextLesson();
     console.log(this.data.lessons);
   }
 
-  displayedColumns = ['time', 'subject', 'classroom', 'lecturer'];
+  displayedColumns = ['time', 'discipline', 'classroom', 'lecturer'];
 }

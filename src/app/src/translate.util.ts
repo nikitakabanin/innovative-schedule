@@ -12,7 +12,7 @@ export function translateGroup(value: string): string {
   };
   let a = Object.keys(translate);
 
-  return [...value.slice(6)]
+  return [...value]
     .map((v: string) => (a.includes(v) ? translate[v] : v))
     .join('');
 }
@@ -30,7 +30,7 @@ export function translateBackGroup(value: string): string {
     Р: 'R',
   };
 
-  let result = 'group_';
+  let result = '';
 
   for (let v of value) {
     if (Object.keys(translate).includes(v)) {

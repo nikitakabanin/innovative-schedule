@@ -1,12 +1,12 @@
 <h1 mat-dialog-title>Редактировать</h1>
 <div mat-dialog-content>
-  <p>{{ data.dayId | weekDay }}</p>
+  <p>{{ data.lessons[0].day }}</p>
   <mat-form-field>
     <mat-label>Время</mat-label>
     <input
       #time="ngModel"
       type="time"
-      [(ngModel)]="data.lessons[0].time"
+      [(ngModel)]="data.lessons[index].time"
       matInput
     />
   </mat-form-field>
@@ -15,7 +15,7 @@
     <input
       matInput
       #subject="ngModel"
-      [(ngModel)]="data.lessons[index].subject"
+      [(ngModel)]="data.lessons[index].discipline"
     />
   </mat-form-field>
   <mat-form-field>

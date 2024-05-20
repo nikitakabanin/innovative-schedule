@@ -4,3 +4,6 @@ mat-card {
 mat-card-header {
   justify-content: space-between;
 }
+tr:nth-of-type(2n) {
+  background-color: ghostwhite;
+}

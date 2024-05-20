@@ -22,7 +22,7 @@ import { Observable } from 'rxjs';
   styleUrl: './auth-dialog.component.scss',
 })
 export class AuthDialogComponent {
-  data: IUser = { name: '', password: '', role: 'student' };
+  data: IUser = { name: '', password: '' };
 
   constructor(public dialogRef: MatDialogRef<AuthDialogComponent>) {}
 }

@@ -1,83 +1,39 @@
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpRequest,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy, SkipSelf, inject } from '@angular/core';
-import { IUser, IGroup } from './src/models';
+import { IUser, IGroup, ILesson, ILessonList } from './src/models';
 import { mockLessons } from './src/mock.table';
-import {
-  BehaviorSubject,
-  Observable,
-  Subject,
-  switchMap,
-  takeUntil,
-  of,
-  catchError,
-} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { translateBackGroup } from './src/translate.util';
-
+import { AuthData } from './src/models';
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService implements OnDestroy {
   private http = inject(HttpClient);
-  private tables = new BehaviorSubject<IGroup[]>(mockLessons);
   private unsubscribe$ = new Subject<void>();
-
-  authToken = '';
-  constructor() {
-    // this.http
-    //   .post<any>(
-    //     'http://26.130.211.203:8080/group_number',
-    //     'group=group_09C31&'
-    //   )
-    //   .pipe(takeUntil(this.unsubscribe$))
-    //   .subscribe((response) => console.log(response));
-    // this.http
-    //   .post<any>(
-    //     'http://26.130.211.203:8080/login',
-    //     'username=aboba&password=32131&'
-    //   )
-    //   .pipe(takeUntil(this.unsubscribe$))
-    //   .subscribe((response) => console.log(response));
-    // this.http
-    //   .get<any>('http://26.130.211.203:8080/all_groups')
-    //   .pipe(takeUntil(this.unsubscribe$))
-    //   .subscribe((v) => console.log(v));
-    // this.http
-    //   .post<any>(
-    //     'http://26.130.211.203:8080/group_number',
-    //     'group=group_09C31&'
-    //   )
-    //   .subscribe((v) => console.log(v));
-    //this.http.get<string>('getauthtokenurl');
-  }
+  private url = '25.52.242.153:8080'; //26.35.147.101//25.52.242.153
+  constructor() {}
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-  getGroupNames(): Observable<{ groups: string[] }> {
-    return this.http.get<{ groups: string[] }>(
-      'http://26.130.211.203:8080/all_groups'
+  getGroupNames() {
+    return this.http.get<{ groups: string[]; token?: string }>(
+      `http://${this.url}/all_groups`
     );
   }
   getGroup(group: string) {
-    return this.http.post<any>(
-      'http://26.130.211.203:8080/group_number',
-      `group=${translateBackGroup(group)}`
-    );
+    return this.http.post<ILesson[]>(`http://${this.url}/group_number`, {
+      group: translateBackGroup(group),
+    });
   }
-  auth(user: IUser): Observable<any> {
-    user.name.toString();
-
-    return this.http.post<any>(
-      'http://26.130.211.203:8080/login',
-      `username=${user.name}&password=${user.password}&`
-    );
+  auth(user: IUser) {
+    return this.http.post<AuthData>(`http://${this.url}/login`, user);
   }
-  edit(group: IGroup) {
-    return this.http.post<any>('http://26.130.211.203:8080/edit', { group });
+  edit(group: { id: string; lessons: ILessonList } | undefined = undefined) {
+    return this.http.post<any>(`http://${this.url}/edit`, {
+      id: mockLessons[0].id,
+      body: JSON.stringify(mockLessons[0]),
+    });
   }
 }
